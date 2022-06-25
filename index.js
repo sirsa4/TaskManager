@@ -11,6 +11,12 @@ const env = require("dotenv");
 //invoke config to be able to use .env variable
 env.config()
 
+//404, error page
+const {errorPage} = require("./middleware/pageNotFound");
+
+//500 server error middleware
+const {error} = require("./middleware/500");
+
 //import task route
 const taskRoute = require("./routes/taskRoute");
 
@@ -20,10 +26,18 @@ const taskRoute = require("./routes/taskRoute");
 //middlwares
 
 //access body.data
+app.use(express.static("./public"));
 app.use(express.json());
 
 //use route
 app.use("/api/v1/tasks", taskRoute);
+
+//404 page not found error page. Must be the last route in this server file
+app.use(errorPage);
+
+//server error
+app.use(error);
+
 
 const port = 3001;
 

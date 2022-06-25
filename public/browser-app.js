@@ -35,7 +35,7 @@ const showTasks = async () => {
 </div>
 </div>`
       })
-      .join('')
+      .join('');
     tasksDOM.innerHTML = allTasks
   } catch (error) {
     tasksDOM.innerHTML =
